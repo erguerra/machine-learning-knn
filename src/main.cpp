@@ -28,9 +28,9 @@ int main()
     if (toupper(normalized) == 'Y')
     {
         output_file_name.append("normalized");
-        std::cout << "Reading normalized training data (" << NORMALIZED_FILE_PATH << ")..." << std::endl;
+        std::cout << "Reading normalized training data (" << NORMALIZED_FILE_PATH << ")..." << std::endl << std::endl;
         read_data_set(training_set, NORMALIZED_FILE_PATH);
-        std::cout << "Reading normalized test data (" << NORMALIZED_TEST_FILE_PATH << ")..." << std::endl;
+        std::cout << "Reading normalized test data (" << NORMALIZED_TEST_FILE_PATH << ")..." << std::endl << std::endl;
         read_data_set(test_set, NORMALIZED_TEST_FILE_PATH);
     }
     else
@@ -42,36 +42,36 @@ int main()
         read_data_set(test_set, NON_NORMALIZED_TEST_FILE_PATH);
     }
 
-    std::cout << "Insert the value of K" << std::endl;
+    std::cout << std::endl << "Insert the value of K:" << std::endl;
     std::cin >> k;
     output_file_name.append("WithK");
     output_file_name.append(std::to_string(k));
 
 
-    std::cout << "Choose distance method" << std::endl;
+    std::cout << std::endl << "Choose distance method" << std::endl;
     std::cout << "E (Euclidean Distance) / M (Manhattan Distance)" << std::endl;
     std::cin >> distance_method;
 
     if (toupper(distance_method) == 'M')
     {
         output_file_name.append("Mahattan");
-        std::cout << "Classifying data using " << k << " nearest neighbors and Manhattan Distance" << std::endl;
+        std::cout << std::endl << "Classifying data using " << k << " nearest neighbors and Manhattan Distance" << std::endl << std::endl;
         classify_data_set(training_set, test_set, results, k, &manhattan_distance);
         hit_percentage = getPercentageOfHits(test_set, results);
-        std::cout << "The percentage of hits for " << k << " neighbors and Manhattan Distance was " << hit_percentage << "%" << std::endl;
     }
     else
     {
         output_file_name.append("Euclidean");
-        std::cout << "Classifying data using " << k << " nearest neighbors and Euclidean Distance" << std::endl;
+        std::cout << std::endl << "Classifying data using " << k << " nearest neighbors and Euclidean Distance" << std::endl << std::endl;
         classify_data_set(training_set, test_set, results, k, &euclidean_distance);
         hit_percentage = getPercentageOfHits(test_set, results);
-        std::cout << "The percentage of hits for " << k << " neighbors and Euclidean Distance was " << hit_percentage << "%" << std::endl;
     }
 
-    output_file_name.append("output");
+    std::cout << "The percentage of hits was: " << hit_percentage << "%" << std::endl << std::endl;
 
-    std::cout << "Writing results..." << std::endl;
+    output_file_name.append("output.csv");
+
     write_data_set_to_file(output_file_name, results, hit_percentage);
-    std::cout << "Done! :)" << std::endl;
+
+    std::cout << std::endl << "Done! :)" << std::endl;
 }

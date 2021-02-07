@@ -7,9 +7,9 @@
 void print_data_set(std::vector<INSTANCE_TYPE> &data_set)
 {
     std::cout.precision(20);
-    for (int i = 0; i < data_set.size(); i++)
+    for (unsigned i = 0; i < (unsigned)data_set.size(); i++)
     {
-        for (int j = 0; j < data_set[i].first.size(); j++)
+        for (unsigned j = 0; j < (unsigned)data_set[i].first.size(); j++)
         {
             std::cout << data_set[i].first[j] << " ";
         }
@@ -60,9 +60,11 @@ void read_data_set(std::vector<INSTANCE_TYPE> &data_set, std::string file_path)
 
 void write_data_set_to_file(std::string file_name,std::vector<INSTANCE_TYPE> data_set, double hit_percentage)
 {
-    std::ofstream file_output(file_name.append(".csv"));
-    if (!file_output.is_open())
+    std::cout << std::endl << "Writing results on " << file_name << std::endl;
+    std::ofstream file_output(file_name);
+    if (!file_output.is_open()){
         throw std::runtime_error("Could not open file...");
+    }       
         file_output << std::setprecision(4) << hit_percentage << '%' << "\n";
     for (unsigned i = 0; i < data_set.size(); i++)
     {

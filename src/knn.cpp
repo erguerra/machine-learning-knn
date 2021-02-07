@@ -11,7 +11,7 @@ INSTANCE_TYPE classify_instance(INSTANCE_TYPE instance, std::vector<INSTANCE_TYP
     all_neighbors_distances.clear();
     unsigned i = 0;
 
-    for (i = 0; i < training_data_set.size(); i++)
+    for (i = 0; i < (unsigned)training_data_set.size(); i++)
     {
         distance = get_distance(instance.first, training_data_set[i].first);
         all_neighbors_distances.push_back(std::make_pair(distance, training_data_set[i].second));
@@ -23,7 +23,7 @@ INSTANCE_TYPE classify_instance(INSTANCE_TYPE instance, std::vector<INSTANCE_TYP
 
     k_nearest_neighbors_labels.clear();
 
-    for (i = 0; i < k; i++)
+    for (i = 0; i < (unsigned)k; i++)
     {
         k_nearest_neighbors_labels.push_back(all_neighbors_distances[i].second);
     }
@@ -43,7 +43,7 @@ INSTANCE_TYPE classify_instance(INSTANCE_TYPE instance, std::vector<INSTANCE_TYP
 void classify_data_set(std::vector<INSTANCE_TYPE> training_data_set, std::vector<INSTANCE_TYPE> test_data_set, std::vector<INSTANCE_TYPE> &results, int k, std::function<double(std::vector<double>, std::vector<double>)> get_distance)
 {
     results.clear();
-    for (unsigned i = 0; i < test_data_set.size(); i++)
+    for (unsigned i = 0; i < (unsigned)test_data_set.size(); i++)
     {
         results.push_back(classify_instance(test_data_set[i], training_data_set, k, get_distance));
     }
@@ -52,7 +52,7 @@ void classify_data_set(std::vector<INSTANCE_TYPE> training_data_set, std::vector
 double getPercentageOfHits(std::vector<INSTANCE_TYPE> test_data_set, std::vector<INSTANCE_TYPE> classified_data_set)
 {
     int hits = 0.0;
-    int numberOfInstances = test_data_set.size();
+    unsigned numberOfInstances = test_data_set.size();
     for (unsigned i = 0; i < numberOfInstances; i++)
     {
         if (test_data_set[i].second == classified_data_set[i].second)
