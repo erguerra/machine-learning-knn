@@ -65,7 +65,7 @@ void write_data_set_to_file(std::string file_name,std::vector<INSTANCE_TYPE> dat
     if (!file_output.is_open()){
         throw std::runtime_error("Could not open file...");
     }       
-        file_output << std::setprecision(4) << hit_percentage << '%' << "\n";
+        file_output << std::setprecision(6) << hit_percentage << '%' << "\n";
     for (unsigned i = 0; i < data_set.size(); i++)
     {
         for (unsigned j = 0; j < data_set[i].first.size(); j++)

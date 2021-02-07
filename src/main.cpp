@@ -69,7 +69,7 @@ int main()
 
     std::cout << "The percentage of hits was: " << hit_percentage << "%" << std::endl << std::endl;
 
-    output_file_name.append("output.csv");
+    output_file_name.append("Output.csv");
 
     write_data_set_to_file(output_file_name, results, hit_percentage);
 
